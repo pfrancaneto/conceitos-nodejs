@@ -10,6 +10,16 @@ app.use(cors());
 
 const repositories = [];
 
+function logRoutes(request, response, next) {
+  const { method, url } = request;
+
+  console.log(`[${method} ${url}]`);
+
+  return next();
+}
+
+app.use(logRoutes);
+
 app.get("/repositories", (request, response) => {
   return response.json(repositories); 
 });
